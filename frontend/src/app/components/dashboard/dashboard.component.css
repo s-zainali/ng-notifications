@@ -1,4 +1,0 @@
-/* this turns the focus design off */
-.notif-heading:focus {
-  box-shadow: none;
-}
