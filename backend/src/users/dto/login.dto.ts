@@ -4,10 +4,10 @@ export class LoginDto {
     @IsString()
     @IsNotEmpty({message: 'Username is required'})
     @NotContains(' ', {message: 'Username cannot conatain spaces'})
-    username: String
+    username: string
 
     @IsString()
     @IsNotEmpty({message: 'Password is required'})
     @MinLength(6, {message: 'Password must be at least 6 characters'})
-    password: String
+    password: string
 }
