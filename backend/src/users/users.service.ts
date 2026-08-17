@@ -36,9 +36,10 @@ export class UsersService {
     return {message: "New user created successfully"};
   }
 
-  async login(loginDto: LoginDto): Promise<{ message: string }> {
+  async login(loginDto: LoginDto): Promise<{ access_token: string }> {
     const { username, password } = loginDto;
 
-    return;
+    
+    return {access_token : ''}
   }
 }
