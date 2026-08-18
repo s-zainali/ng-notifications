@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
 import AuthForm from "../components/AuthForm";
-import InputField from "../components/InputField";
 import { useState } from "react";
 import AuthTypeSwitch from "../components/AuthTypeSwitch";
+import { useNavigate } from "react-router-dom";
+import { authService } from "../services/authService";
 
 function RegisterPage() {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     fullName: "",
     username: "",
@@ -12,13 +13,15 @@ function RegisterPage() {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let localErrors: Record<string, string> = {};
 
@@ -28,9 +31,21 @@ function RegisterPage() {
 
     if (Object.keys(localErrors).length > 0) {
       setErrors(localErrors);
-    } else {
-      setErrors({});
-      console.log("Logging in with:", credentials);
+      return;
+    }
+
+    setErrors({});
+    setLoading(true);
+
+    try {
+      await authService.register(credentials);
+      navigate("/login");
+    } catch (err) {
+      setApiError(
+        err.response?.data?.message || "Registration failed. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,15 +60,17 @@ function RegisterPage() {
             Enter your details to register for an account
           </p>
         </div>
-        <div className="px-12 py-10 bg-alabaster-grey-50 rounded-3xl border-2 border-ink-black-800 flex flex-col gap-6 min-w-sm  flex justify-between">
-          <AuthTypeSwitch currentPage={'register'}/>
+        <div className="px-12 py-10 bg-alabaster-grey-50 rounded-3xl border-2 border-ink-black-800 flex flex-col gap-6 min-w-sm min-h-[55dvh] flex justify-between">
+          <AuthTypeSwitch currentPage={"register"} />
           <AuthForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             credentials={credentials}
             errors={errors}
-            type='register'
-            />
+            type="register"
+            loading={loading}
+            apiError={apiError}
+          />
         </div>
       </div>
     </div>

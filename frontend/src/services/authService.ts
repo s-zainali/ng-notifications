@@ -1,7 +1,7 @@
 import { api } from "./api";
 
 export interface LoginCredentials {
-    email: string;
+    username: string;
     password: string;
 }
 
@@ -14,7 +14,7 @@ export interface AuthResponse {
     user: {
         id: string;
         fullname: string;
-        email: string;
+        username: string;
     }
 }
 

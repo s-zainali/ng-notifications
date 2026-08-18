@@ -1,6 +1,6 @@
 import InputField from "./InputField";
 
-function AuthForm({ handleSubmit, credentials, handleChange, errors, type }) {
+function AuthForm({ handleSubmit, credentials, handleChange, errors, loading, type, apiError }) {
   return (
     <form
       onSubmit={handleSubmit}
@@ -43,9 +43,9 @@ function AuthForm({ handleSubmit, credentials, handleChange, errors, type }) {
       </div>
       <button
         type="submit"
-        className="w-full py-2.5 px-4 bg-ink-black-800 hover:bg-ink-black-600 text-sm font-bold uppercase rounded-l-lg text-alabaster-grey-100 font-semibold rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-200 outline-none transition-colors cursor-pointer"
+        className="w-full py-2.5 px-4 bg-ink-black-800 hover:bg-ink-black-600 text-sm font-bold uppercase rounded-l-lg text-alabaster-grey-100 font-semibold rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-200 outline-none transition-colors duration-300 ease-in-out cursor-pointer"
       >
-        {type === 'login'? 'Login' : 'Register'}
+        {loading ? "Processing..." : type === "register" ? "Register" : "Sign In"}
       </button>
     </form>
   );

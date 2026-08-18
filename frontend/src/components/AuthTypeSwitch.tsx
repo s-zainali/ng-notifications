@@ -6,13 +6,13 @@ function AuthTypeSwitch({currentPage}) {
       <div className="flex overflow-hidden rounded-xl border-1 border-ink-black-800">
         <Link
           to="/login"
-          className={`cursor-pointer text-sm font-bold uppercase text-center w-25 p-2 ${currentPage === 'login'? 'text-alabaster-grey-100 bg-ink-black-800 hover:bg-ink-black-700' : ''}`}
+          className={`cursor-pointer text-sm font-bold uppercase text-center w-25 p-2 hover:bg-ink-black-700 hover:text-alabaster-grey-50 transition duration-300 ease-in-out ${currentPage === 'login'? 'text-alabaster-grey-100 bg-ink-black-800 ' : ''}`}
         >
           Login
         </Link>
         <Link
           to="/register"
-          className={`cursor-pointer text-sm font-bold uppercase text-center w-25 p-2 ${currentPage === 'register'? 'text-alabaster-grey-100 bg-ink-black-800 hover:bg-ink-black-700' : ''}`}
+          className={`cursor-pointer text-sm font-bold uppercase text-center w-25 p-2 hover:bg-ink-black-700 hover:text-alabaster-grey-50 transition duration-300 ease-in-out ${currentPage === 'register'? 'text-alabaster-grey-100 bg-ink-black-800 ' : ''}`}
         >
           Register
         </Link>
