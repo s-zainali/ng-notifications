@@ -70,7 +70,7 @@ function LoginPage() {
             Enter your username and password to log in
           </p>
         </div>
-        <div className="px-12 py-10 bg-alabaster-grey-50 rounded-3xl border-2 border-ink-black-800 flex flex-col gap-6 min-w-sm min-h-[60dvh] flex justify-between">
+        <div className="px-12 py-10 bg-alabaster-grey-100 rounded-3xl border-2 border-ink-black-800 flex flex-col gap-6 min-w-sm min-h-[60dvh] flex justify-between">
           <AuthTypeSwitch currentPage={"login"} />
           <AuthForm
             handleSubmit={handleSubmit}

@@ -46,7 +46,7 @@ function RegisterPage() {
 
     try {
       await authService.register(credentials);
-    //   navigate("/login");
+      navigate("/login");
     } catch (err) {
       setApiError(
         err.response?.data?.message || "Registration failed. Please try again."
@@ -67,7 +67,7 @@ function RegisterPage() {
             Enter your details to register for an account
           </p>
         </div>
-        <div className="px-12 py-10 bg-alabaster-grey-50 rounded-3xl border-2 border-ink-black-800 flex flex-col gap-6 min-w-sm min-h-[60dvh] flex justify-between">
+        <div className="px-12 py-10 bg-alabaster-grey-100 rounded-3xl border-2 border-ink-black-800 flex flex-col gap-6 min-w-sm min-h-[60dvh] flex justify-between">
           <AuthTypeSwitch currentPage={"register"} />
           <AuthForm
             handleSubmit={handleSubmit}
