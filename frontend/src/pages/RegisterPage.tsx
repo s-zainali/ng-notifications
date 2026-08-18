@@ -19,14 +19,21 @@ function RegisterPage() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
+    if (errors[name]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let localErrors: Record<string, string> = {};
 
-    if (!credentials.fullName) localErrors.email = "Full Name is required";
-    if (!credentials.username) localErrors.email = "Username is required";
+    if (!credentials.fullName) localErrors.fullName = "Full Name is required";
+    if (!credentials.username) localErrors.username = "Username is required";
     if (!credentials.password) localErrors.password = "Password is required";
 
     if (Object.keys(localErrors).length > 0) {
@@ -39,7 +46,7 @@ function RegisterPage() {
 
     try {
       await authService.register(credentials);
-      navigate("/login");
+    //   navigate("/login");
     } catch (err) {
       setApiError(
         err.response?.data?.message || "Registration failed. Please try again."
@@ -60,7 +67,7 @@ function RegisterPage() {
             Enter your details to register for an account
           </p>
         </div>
-        <div className="px-12 py-10 bg-alabaster-grey-50 rounded-3xl border-2 border-ink-black-800 flex flex-col gap-6 min-w-sm min-h-[55dvh] flex justify-between">
+        <div className="px-12 py-10 bg-alabaster-grey-50 rounded-3xl border-2 border-ink-black-800 flex flex-col gap-6 min-w-sm min-h-[60dvh] flex justify-between">
           <AuthTypeSwitch currentPage={"register"} />
           <AuthForm
             handleSubmit={handleSubmit}

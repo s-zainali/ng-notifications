@@ -1,6 +1,14 @@
 import InputField from "./InputField";
 
-function AuthForm({ handleSubmit, credentials, handleChange, errors, loading, type, apiError }) {
+function AuthForm({
+  handleSubmit,
+  credentials,
+  handleChange,
+  errors,
+  loading,
+  type,
+  apiError,
+}) {
   return (
     <form
       onSubmit={handleSubmit}
@@ -26,7 +34,7 @@ function AuthForm({ handleSubmit, credentials, handleChange, errors, loading, ty
           name="username"
           value={credentials.username}
           onChange={handleChange}
-          placeholder="you@example.com"
+          placeholder="myusername"
           error={errors.username}
         />
 
@@ -41,12 +49,23 @@ function AuthForm({ handleSubmit, credentials, handleChange, errors, loading, ty
           error={errors.password}
         />
       </div>
-      <button
-        type="submit"
-        className="w-full py-2.5 px-4 bg-ink-black-800 hover:bg-ink-black-600 text-sm font-bold uppercase rounded-l-lg text-alabaster-grey-100 font-semibold rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-200 outline-none transition-colors duration-300 ease-in-out cursor-pointer"
-      >
-        {loading ? "Processing..." : type === "register" ? "Register" : "Sign In"}
-      </button>
+      <div>
+        {apiError !== "" && (
+          <div className="text-sm mb-2 transition duration-400 ease-in-out text-center tracking-wide text-red-600">
+            {apiError}
+          </div>
+        )}
+        <button
+          type="submit"
+          className="w-full py-2.5 px-4 bg-ink-black-800 hover:bg-ink-black-600 text-sm font-bold uppercase rounded-l-lg text-alabaster-grey-100 font-semibold rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-200 outline-none transition-colors duration-300 ease-in-out cursor-pointer"
+        >
+          {loading
+            ? "Processing..."
+            : type === "register"
+            ? "Register"
+            : "Sign In"}
+        </button>
+      </div>
     </form>
   );
 }

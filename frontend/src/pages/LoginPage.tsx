@@ -18,6 +18,13 @@ function LoginPage() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
+    if (errors[name]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -42,7 +49,7 @@ function LoginPage() {
         localStorage.setItem("user", JSON.stringify(data.user));
       }
 
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (err) {
       setApiError(
         err.response?.data?.message || "Invalid username or password"
@@ -63,7 +70,7 @@ function LoginPage() {
             Enter your username and password to log in
           </p>
         </div>
-        <div className="px-12 py-10 bg-alabaster-grey-50 rounded-3xl border-2 border-ink-black-800 flex flex-col gap-6 min-w-sm min-h-[55dvh] flex justify-between">
+        <div className="px-12 py-10 bg-alabaster-grey-50 rounded-3xl border-2 border-ink-black-800 flex flex-col gap-6 min-w-sm min-h-[60dvh] flex justify-between">
           <AuthTypeSwitch currentPage={"login"} />
           <AuthForm
             handleSubmit={handleSubmit}
