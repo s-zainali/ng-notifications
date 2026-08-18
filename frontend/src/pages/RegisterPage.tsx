@@ -46,13 +46,13 @@ function RegisterPage() {
           </p>
         </div>
         <div className="px-12 py-10 bg-alabaster-grey-50 rounded-3xl border-2 border-ink-black-800 flex flex-col gap-6 min-w-sm  flex justify-between">
-          <AuthTypeSwitch currentPage={'sign-up'}/>
+          <AuthTypeSwitch currentPage={'register'}/>
           <AuthForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             credentials={credentials}
             errors={errors}
-            type='sign-up'
+            type='register'
             />
         </div>
       </div>
