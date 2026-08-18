@@ -4,7 +4,6 @@ import { Notification, NotificationDocument } from "./notification.schema";
 import { CreateNotificationDto } from "./dto/create-notification.dto";
 import { Model, Types } from "mongoose";
 import { UpdateNotificationDto } from "./dto/update-notification.dto";
-import { identity } from "rxjs";
 
 @Injectable()
 export class NotificationsService {
