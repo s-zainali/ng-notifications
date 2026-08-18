@@ -1,6 +1,8 @@
 import AuthForm from "../components/AuthForm";
 import InputField from "../components/InputField";
+import { Link } from "react-router-dom";
 import { useState } from "react";
+import AuthTypeSwitch from "../components/AuthTypeSwitch";
 
 function LoginPage() {
   const [credentials, setCredentials] = useState({
@@ -42,23 +44,14 @@ function LoginPage() {
           </p>
         </div>
         <div className="px-12 py-10 bg-alabaster-grey-50 rounded-3xl border-2 border-ink-black-800 flex flex-col gap-6 min-w-sm  flex justify-between">
-          <div className="flex gap-4 items-center justify-center">
-            <div className="flex overflow-hidden rounded-xl border-1 border-ink-black-800">
-              <button className="cursor-pointer text-sm font-bold uppercase w-25 p-2 text-alabaster-grey-100 bg-ink-black-800 hover:bg-ink-black-700">
-                Login
-              </button>
-              <button className="cursor-pointer text-sm font-bold uppercase w-25 p-2 ">
-                Sign Up
-              </button>
-            </div>
-          </div>
+          <AuthTypeSwitch currentPage={'login'}/>
           <AuthForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             credentials={credentials}
             errors={errors}
-            type='login'
-            />
+            type="login"
+          />
         </div>
       </div>
     </div>
