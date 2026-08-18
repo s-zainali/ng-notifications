@@ -1,3 +1,5 @@
+import NotificationCard from "../components/NotificationCard";
+
 function DashboardPage() {
   return (
     <div className="h-[100dvh] w-[100dvw] bg-alabaster-grey-200 flex flex-col gap-6 p-6">
@@ -24,8 +26,27 @@ function DashboardPage() {
         </div>
       </header>
       <main className="flex flex-col gap-6 h-full">
-        <div className="bg-alabaster-grey-100 w-full h-50 rounded-3xl border-1 borer-ink-black-800"></div>
-        <div className="bg-alabaster-grey-100 w-full h-full rounded-3xl border-1 borer-ink-black-800"></div>
+        <div className="bg-alabaster-grey-100 w-full h-50 rounded-3xl border-1 borer-ink-black-800 p-4"></div>
+        <div className="bg-alabaster-grey-100 w-full h-full rounded-3xl border-1 borer-ink-black-800 p-4 flex flex-col gap-4">
+            <h2 className="text-xl font-bold text-ink-black-800">My Notifications</h2>
+            <div className="flex flex-col gap-4">
+                <NotificationCard 
+                    category={'INFO'}
+                    header={'Sample Info Header'}
+                    body={'This is a sample body for info'}
+                    />
+                <NotificationCard 
+                    category={'WARNING'}
+                    header={'Sample Warning Header'}
+                    body={'This is a sample body for warning'}
+                    />
+                <NotificationCard 
+                    category={'ERROR'}
+                    header={'Sample Error Header'}
+                    body={'This is a sample body for error'}
+                    />
+            </div>
+        </div>
       </main>
     </div>
   );
