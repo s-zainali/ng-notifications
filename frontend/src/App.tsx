@@ -1,12 +1,17 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import DashboardPage from './pages/DashboardPage';
-import NewNotificationPage from './pages/NewNotificationPage';
-import EditNotificationPage from './pages/EditNotificationPage';
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import DashboardPage from "./pages/DashboardPage";
+import NewNotificationPage from "./pages/NewNotificationPage";
+import EditNotificationPage from "./pages/EditNotificationPage";
 
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -17,31 +22,31 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
-        <Route 
-          path="/dashboard" 
+        <Route
+          path="/dashboard"
           element={
-            <DashboardPage />
-            // <ProtectedRoute>
-            // </ProtectedRoute>
-          } 
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          }
         />
-        
-        <Route 
-          path="/notifications/new" 
+
+        <Route
+          path="/notifications/new"
           element={
             <ProtectedRoute>
               <NewNotificationPage />
             </ProtectedRoute>
-          } 
+          }
         />
-        
-        <Route 
-          path="/notifications/:id" 
+
+        <Route
+          path="/notifications/:id"
           element={
             <ProtectedRoute>
               <EditNotificationPage />
             </ProtectedRoute>
-          } 
+          }
         />
       </Routes>
     </Router>

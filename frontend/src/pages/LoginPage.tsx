@@ -44,11 +44,13 @@ function LoginPage() {
 
     try {
       const data = await authService.login(credentials);
-      localStorage.setItem("token", data.auth_token);
-      if (data.user) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-      }
-
+      localStorage.setItem("token", data.access_token);
+      const userInfo = {
+        _id: data._id,
+        fullName: data.fullName,
+        username: data.username,
+      };
+      localStorage.setItem("user", JSON.stringify(userInfo));
       navigate("/dashboard");
     } catch (err) {
       setApiError(

@@ -9,11 +9,11 @@ export class UsersController {
 
     @Post('register')
     async register(@Body() registerDto: RegisterDto) {
-        this.usersService.register(registerDto)
+        return this.usersService.register(registerDto)
     }
 
     @Post('login')
     async login(@Body() loginDto: LoginDto) {
-        this.usersService.login(loginDto)
+        return this.usersService.login(loginDto)
     }
 }

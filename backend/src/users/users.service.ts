@@ -55,7 +55,7 @@ export class UsersService {
       throw new UnauthorizedException('Incorrect username or password');
     }
 
-    const isPasswordValid = bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       throw new UnauthorizedException('Incorrect username or password');
     }
