@@ -63,7 +63,7 @@ function DashboardPage() {
           <h2 className="text-xl font-bold text-ink-black-800">
             Live Notifications
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {visibleBanners.map((item) => (
               <NotificationCard
                 key={item._id}
@@ -95,7 +95,7 @@ function DashboardPage() {
               <span className="text-xl font-bold">+</span>
             </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {notifications.map((item) => (
               <NotificationCard
                 key={item._id}
@@ -104,7 +104,7 @@ function DashboardPage() {
                 body={item.body}
                 isLive={false}
                 onDelete={() => deleteNotification(item._id)}
-                onEdit={() => navigate(`/notifications/edit/${item._id}`)}
+                onEdit={() => navigate(`/notifications/${item._id}`)}
               />
             ))}
           </div>
