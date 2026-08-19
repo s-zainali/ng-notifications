@@ -1,5 +1,6 @@
-// components/ProtectedRoute.jsx
 import { Navigate } from 'react-router-dom';
+import { NotificationProvider } from '../context/NotificationContext';
+import { Outlet } from 'react-router-dom';
 
 const isTokenValid = () => {
   const token = localStorage.getItem('token');
@@ -19,7 +20,11 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/login" replace />;
   }
 
-  return children;
+  return (
+    <NotificationProvider>
+      {children ? children : <Outlet />}
+    </NotificationProvider>
+  );
 };
 
 export default ProtectedRoute;
