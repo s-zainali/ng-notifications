@@ -75,12 +75,12 @@ function DashboardPage() {
               />
             ))}
 
+          </div>
             {hasMoreBanners && (
-              <div className="bg-ink-black-800 border border-ink-black-700 text-alabaster-grey-50 rounded-2xl p-4 flex items-center justify-center text-center font-bold text-xs uppercase tracking-wider">
+              <div className="bg-ink-black-800 border border-ink-black-700 text-alabaster-grey-50 rounded-2xl p-2 flex items-center justify-center text-center font-bold text-xs uppercase tracking-wider">
                 You have more notifications
               </div>
             )}
-          </div>
         </div>
         <div className="bg-alabaster-grey-100 w-full h-full rounded-3xl border-1 border-ink-black-800 p-4 flex flex-col gap-4">
           <div className="flex justify-between items-start">

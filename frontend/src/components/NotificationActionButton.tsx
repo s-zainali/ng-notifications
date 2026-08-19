@@ -1,4 +1,4 @@
-function NotificationActionButton({ imgUrl, action, title ,onClick}) {
+function NotificationActionButton({ imgUrl, action, title, onClick }) {
   return (
     <button
       className="cursor-pointer opacity-70 hover:opacity-90 "
@@ -6,12 +6,7 @@ function NotificationActionButton({ imgUrl, action, title ,onClick}) {
       onClick={onClick}
     >
       {action !== "dismiss" && <img src={imgUrl} alt={title} className="h-5" />}
-      {action === "dismiss" && (
-        <div className="text-xs bg-ink-black-900/50 py-1 px-2 rounded-lg text-alabaster-grey-50 opacity-80 hover:opacity-100 transition duration-300 ease-in-out relative overflow-hidden">
-          <div className="w-full h-full bg-alabaster-grey-400 absolute top-0 left-0 z-5"></div>
-          <span className="z-5">Dismiss</span>
-        </div>
-      )}
+      {action === "dismiss" && <span className="z-5 text-[8px] text-alabaster-grey-50 py-0.5 px-1.5 rounded-md bg-ink-black-800">Dismiss</span>}
     </button>
   );
 }

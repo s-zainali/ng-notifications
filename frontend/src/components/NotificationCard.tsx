@@ -45,7 +45,7 @@ function NotificationCard({
           <span
             className={`text-[9px] px-1.5 py-0.5 rounded-md font-bold tracking-widest text-center min-w-[4rem] shrink-0 border-1 text-alabaster-grey-100 ${
                 category === "INFO"
-                  ? `border-blue-700 bg-blue-600 ${
+                  ? `border-blue-800 bg-blue-700 ${
                       isLive ? "w-full" : ""
                     }`
                   : category === "WARNING"
@@ -53,7 +53,7 @@ function NotificationCard({
                       isLive ? "w-full" : ""
                     }`
                   : category === "ERROR"
-                  ? `border-red-700 bg-red-600 ${
+                  ? `border-red-800 bg-red-700 ${
                       isLive ? "w-full" : ""
                     }`
                   : ""
@@ -107,7 +107,7 @@ function NotificationCard({
         </div>
       </div>
 
-      <div className="flex items-end justify-between gap-2 mt-2 min-w-0">
+      <div className="flex items-end justify-between gap-2 min-w-0">
         <p
           className={`text-xs text-ink-black-800 font-medium break-words flex-1 ${
             isExpanded ? "" : "line-clamp-2"
