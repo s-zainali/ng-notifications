@@ -74,10 +74,9 @@ function DashboardPage() {
                 onClose={() => dismissNotification(item._id)}
               />
             ))}
-
           </div>
             {hasMoreBanners && (
-              <div className="bg-ink-black-800 border border-ink-black-700 text-alabaster-grey-50 rounded-2xl p-2 flex items-center justify-center text-center font-bold text-xs uppercase tracking-wider">
+              <div className="bg-ink-black-800 border border-ink-black-700 text-alabaster-grey-50 rounded-xl p-2 flex items-center justify-center text-center font-bold text-xs uppercase tracking-wider">
                 You have more notifications
               </div>
             )}
