@@ -3,7 +3,7 @@ import {
     useEffect,
     useRef,
     type ChangeEvent,
-    type FormEvent,
+    type SyntheticEvent,
   } from "react";
   import type { NavigateFunction } from "react-router-dom";
   import InputField from "./InputField";
@@ -19,7 +19,7 @@ import {
     handleChange: (
       e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => void;
-    handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+    handleSubmit: (e: SyntheticEvent<HTMLFormElement>) => void;
     errors: Record<string, string>;
     loading: boolean;
     navigate: NavigateFunction;

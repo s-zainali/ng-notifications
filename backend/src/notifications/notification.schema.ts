@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Schema as MongooseSchema } from "mongoose";
+import { Document, Schema as MongooseSchema, Types} from "mongoose";
 
 export type NotificationDocument = Notification & Document
 
@@ -18,7 +18,7 @@ export class Notification {
     isClosed: boolean
     
     @Prop({type: MongooseSchema.Types.ObjectId, ref: 'User', required: true, })
-    userId: MongooseSchema.Types.ObjectId
+    userId: Types.ObjectId;
     
     @Prop({required:true, type: Number})
     date: number 

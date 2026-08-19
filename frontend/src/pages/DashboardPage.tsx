@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NotificationCard from "../components/NotificationCard";
 import { authService } from "../services/authService";
@@ -5,11 +6,21 @@ import { useNotifications } from "../context/NotificationContext";
 
 function DashboardPage() {
   const navigate = useNavigate();
-  const { notifications, dismissNotification, deleteNotification } =
-    useNotifications();
-  const user = JSON.parse(localStorage.getItem("user"));
+  const {
+    notifications,
+    fetchNotifications,
+    dismissNotification,
+    deleteNotification,
+  } = useNotifications();
 
-  const fullName = user?.fullName;
+  useEffect(() => {
+    fetchNotifications();
+  }, []);
+
+  const storedUser = localStorage.getItem("user");
+  const fullName = storedUser
+    ? (JSON.parse(storedUser) as { fullName?: string }).fullName
+    : undefined;
 
   function handleLogout() {
     authService.logout();
@@ -31,7 +42,7 @@ function DashboardPage() {
             </span>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center bg-gradient-to-r from transparent via-alabaster-grey-200 to-transparent">
+        <div className="flex flex-col justify-center items-center bg-gradient-to-r from-transparent via-alabaster-grey-200 to-transparent">
           <div className="w-full lg:w-lg xl:w-xl h-[1px] bg-gradient-to-r from-transparent via-ink-black-800 to-transparent "></div>
           <h1 className="text-center text-2xl text-ink-black-800 font-bold tracking-widest">
             NG-Notifications
@@ -48,7 +59,7 @@ function DashboardPage() {
         </div>
       </header>
       <main className="flex flex-col gap-6 h-full">
-        <div className="bg-alabaster-grey-100 w-full  rounded-3xl border-1 flex flex-col gap-4 borer-ink-black-800 p-4">
+        <div className="bg-alabaster-grey-100 w-full  rounded-3xl border-1 flex flex-col gap-4 border-ink-black-800 p-4">
           <h2 className="text-xl font-bold text-ink-black-800">
             Live Notifications
           </h2>
@@ -71,12 +82,15 @@ function DashboardPage() {
             )}
           </div>
         </div>
-        <div className="bg-alabaster-grey-100 w-full h-full rounded-3xl border-1 borer-ink-black-800 p-4 flex flex-col gap-4">
+        <div className="bg-alabaster-grey-100 w-full h-full rounded-3xl border-1 border-ink-black-800 p-4 flex flex-col gap-4">
           <div className="flex justify-between items-start">
             <h2 className="text-xl font-bold text-ink-black-800">
               My Notifications
             </h2>
-            <button onClick={() => navigate('/notifications/new')} className="cursor-pointer flex gap-1 items-center text-alabaster-grey-50 rounded-xl h-full px-3 hover:bg-ink-black-700 transition duration-300 ease-in-out bg-ink-black-800 border-1 border-ink-black-800">
+            <button
+              onClick={() => navigate("/notifications/new")}
+              className="cursor-pointer flex gap-1 items-center text-alabaster-grey-50 rounded-xl h-full px-3 hover:bg-ink-black-700 transition duration-300 ease-in-out bg-ink-black-800 border-1 border-ink-black-800"
+            >
               <span className="text-sm font-bold tracking-tight ">ADD</span>
               <span className="text-xl font-bold">+</span>
             </button>

@@ -11,7 +11,4 @@ export class CreateNotificationDto {
   
     @IsEnum(['INFO', 'WARNING', 'ERROR'], { message: 'Invalid category choice' })
     category: string;
-  
-    @IsNumber()
-    date: number;
   }

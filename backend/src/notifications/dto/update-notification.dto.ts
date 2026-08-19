@@ -12,7 +12,7 @@ export class UpdateNotificationDto {
   @IsEnum(['INFO', 'WARNING', 'ERROR'])
   @IsOptional()
   category?: string;
-  
+
   @IsBoolean()
   @IsOptional()
   isClosed?: boolean;

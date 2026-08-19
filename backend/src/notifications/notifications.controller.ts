@@ -2,7 +2,10 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Request } from "@nestj
 import { NotificationsService } from "./notifications.service";
 import { CreateNotificationDto } from "./dto/create-notification.dto";
 import { UpdateNotificationDto } from "./dto/update-notification.dto";
+import { UseGuards } from "@nestjs/common";
+import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 
+@UseGuards(JwtAuthGuard)
 @Controller('notifications')
 export class NotificationsController {
     constructor(
