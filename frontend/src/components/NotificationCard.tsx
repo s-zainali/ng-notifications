@@ -1,3 +1,5 @@
+import NotificationActionButton from "./NotificationActionButton";
+
 function NotificationCard({ category, header, body, isLive }) {
   return (
     <div
@@ -17,16 +19,22 @@ function NotificationCard({ category, header, body, isLive }) {
         <p className="text-sm">{body}</p>
       </div>
       {!isLive && (
-        <div className="flex items-center justify-between gap-4 opacity-70">
-          <button className="cursor-pointer" title="Notify">
-            <img src="/bell.png" alt="Notify" className="h-5" />
-          </button>
-          <button className="cursor-pointer" title="Edit">
-            <img src="/edit.png" alt="Edit" className="h-5" />
-          </button>
-          <button className="cursor-pointer" title="Delete"> 
-            <img src="/delete.png" alt="delete" className="h-5" />
-          </button>
+        <div className="flex items-center justify-between gap-4">
+            <NotificationActionButton
+            imgUrl={'/bell.png'}
+            title={'Notify'}
+            action={'notify'}
+            />
+            <NotificationActionButton
+            imgUrl={'/edit.png'}
+            title={'Edit'}
+            action={'edit'}
+            />
+            <NotificationActionButton
+            imgUrl={'/delete.png'}
+            title={'Delete'}
+            action={'delete'}
+            />
         </div>
       )}
     </div>
