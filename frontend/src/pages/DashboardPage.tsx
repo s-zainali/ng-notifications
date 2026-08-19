@@ -76,7 +76,7 @@ function DashboardPage() {
             <h2 className="text-xl font-bold text-ink-black-800">
               My Notifications
             </h2>
-            <button className="cursor-pointer flex gap-1 items-center text-alabaster-grey-50 rounded-xl h-full px-3 hover:bg-ink-black-700 transition duration-300 ease-in-out bg-ink-black-800 border-1 border-ink-black-800">
+            <button onClick={() => navigate('/notifications/new')} className="cursor-pointer flex gap-1 items-center text-alabaster-grey-50 rounded-xl h-full px-3 hover:bg-ink-black-700 transition duration-300 ease-in-out bg-ink-black-800 border-1 border-ink-black-800">
               <span className="text-sm font-bold tracking-tight ">ADD</span>
               <span className="text-xl font-bold">+</span>
             </button>
