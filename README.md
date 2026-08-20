@@ -109,3 +109,23 @@ This starts the Vite dev server at `http://localhost:5173`. Open that URL in you
  
 Make sure `VITE_API_URL` in `frontend/.env` points at the backend(`http://localhost:3000` by default). The backend already allows requests from the Vite dev server origin via CORS.
  
+## Running Tests
+ 
+The backend includes unit tests for its services (the Mongoose model is mocked, so **no database is required** to run them).
+ 
+From the project root:
+ 
+```
+cd backend
+npm test
+```
+ 
+Useful variants:
+ 
+```
+npm run test:watch   # re-run on file changes
+npm run test:cov     # run with a coverage report
+```
+ 
+> The end-to-end tests (`npm run test:e2e`) boot the full application and
+> therefore need a running MongoDB instance and the backend `.env` in place.
