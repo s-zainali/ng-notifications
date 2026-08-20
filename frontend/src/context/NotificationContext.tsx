@@ -71,7 +71,7 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
     const timers = infoBanners.map((banner) =>
       setTimeout(() => {
         dismissNotification(banner._id);
-      }, 10000)
+      }, 90000)
     );
 
     return () => timers.forEach((timer) => clearTimeout(timer));
