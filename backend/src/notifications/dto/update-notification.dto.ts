@@ -17,7 +17,4 @@ export class UpdateNotificationDto {
   @IsOptional()
   isClosed?: boolean;
   
-  @IsNumber()
-  @IsOptional()
-  date?: number;
 }

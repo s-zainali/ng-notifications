@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -30,7 +31,7 @@ export class UsersService {
 
     const existingUser = await this.userModel.findOne({ username });
     if (existingUser) {
-      throw new BadRequestException('Username is already taken');
+      throw new ConflictException('Username is already taken');
     }
 
     const salt = await bcrypt.genSalt(10);

@@ -1,7 +1,6 @@
 import {
   Injectable,
   NotFoundException,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Notification, NotificationDocument } from './notification.schema';
@@ -47,7 +46,7 @@ export class NotificationsService {
     }
 
     if (notification.userId.toString() !== userId) {
-      throw new UnauthorizedException(
+      throw new NotFoundException(
         'This notification does not belong to you',
       );
     }
