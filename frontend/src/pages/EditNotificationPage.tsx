@@ -1,7 +1,7 @@
 import { useState, useEffect, type ChangeEvent, type SyntheticEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useNotifications } from "../context/NotificationContext";
-import { api } from "../services/api";
+import { notificationService } from "../services/notificationService";
 import NotificationForm, {
   type NotificationFormData,
 } from "../components/NotificationForm";
@@ -41,7 +41,7 @@ function EditNotificationPage() {
       }
 
       try {
-        const { data } = await api.get(`/notifications/${id}`);
+        const data = await notificationService.findOne(id)
         if (!active) return;
         setFormData({
           category: data.category ?? "INFO",
@@ -91,7 +91,7 @@ function EditNotificationPage() {
     setLoading(true);
 
     try {
-      await api.put(`/notifications/${id}`, formData);
+      await notificationService.update(id, formData)
       await fetchNotifications();
       navigate("/dashboard");
     } catch (err) {

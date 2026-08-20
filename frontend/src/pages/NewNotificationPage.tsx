@@ -1,7 +1,7 @@
 import { useState, type ChangeEvent, type SyntheticEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNotifications } from "../context/NotificationContext";
-import { api } from "../services/api";
+import { notificationService } from "../services/notificationService";
 import NotificationForm, {
   type NotificationFormData,
 } from "../components/NotificationForm";
@@ -58,7 +58,7 @@ function NewNotificationPage() {
     setLoading(true);
 
     try {
-      await api.post("/notifications", formData);
+      await notificationService.create(formData)
       await fetchNotifications();
       navigate("/dashboard");
     } catch (err) {
