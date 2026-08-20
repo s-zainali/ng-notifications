@@ -1,6 +1,8 @@
 import { useState } from "react";
 import NotificationActionButton from "./NotificationActionButton";
 
+const AUTO_DISMISS_MS = 90000;
+
 interface NotificationCardProps {
   category: "INFO" | "WARNING" | "ERROR" | string;
   header: string;
@@ -38,35 +40,31 @@ function NotificationCard({
               isLive ? "shadow-md shadow-red-500/50" : ""
             }`
           : ""
-      } ${isExpanded ? "h-auto" : isLive? "min-h-25" :"min-h-21 max-h-21"}`}
+      } ${isExpanded ? "h-auto" : isLive ? "min-h-25" : "min-h-21 max-h-21"}`}
     >
       <div className="flex items-start justify-between gap-2 min-w-0">
-        <div className={`flex flex-1 items-start justify-start gap-2 min-w-0 ${isLive? 'flex-col' : ''}`}>
+        <div
+          className={`flex flex-1 items-start justify-start gap-2 min-w-0 ${
+            isLive ? "flex-col" : ""
+          }`}
+        >
           <span
             className={`text-[9px] px-1.5 py-0.5 rounded-md font-bold tracking-widest text-center min-w-[4rem] shrink-0 border-1 text-alabaster-grey-100 ${
-                category === "INFO"
-                  ? `border-blue-800 bg-blue-700 ${
-                      isLive ? "w-full" : ""
-                    }`
-                  : category === "WARNING"
-                  ? `border-amber-700 bg-amber-600 ${
-                      isLive ? "w-full" : ""
-                    }`
-                  : category === "ERROR"
-                  ? `border-red-800 bg-red-700 ${
-                      isLive ? "w-full" : ""
-                    }`
-                  : ""
-              }`}
+              category === "INFO"
+                ? `border-blue-800 bg-blue-700 ${isLive ? "w-full" : ""}`
+                : category === "WARNING"
+                ? `border-amber-700 bg-amber-600 ${isLive ? "w-full" : ""}`
+                : category === "ERROR"
+                ? `border-red-800 bg-red-700 ${isLive ? "w-full" : ""}`
+                : ""
+            }`}
           >
             {category}
           </span>
           <h2
             className={`text-sm uppercase font-bold text-ink-black-800  ${
               !isExpanded ? "truncate" : ""
-            } ${
-                isLive ? 'max-w-full' : ''
-            }`}
+            } ${isLive ? "max-w-full" : ""}`}
           >
             {header}
           </h2>
@@ -123,6 +121,7 @@ function NotificationCard({
               title={"Dismiss"}
               action={"dismiss"}
               onClick={onClose}
+              countdownMs={category === "INFO" ? AUTO_DISMISS_MS : undefined}
             />
           </div>
         )}

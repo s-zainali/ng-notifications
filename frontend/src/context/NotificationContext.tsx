@@ -3,20 +3,18 @@ import {
   useContext,
   useState,
   useEffect,
+  useRef,
   type ReactNode,
 } from "react";
-import { api } from "../services/api";
+import {
+  notificationService,
+  type Notification,
+} from "../services/notificationService";
 
-export interface NotificationItem {
-  _id: string;
-  category: "INFO" | "WARNING" | "ERROR";
-  header: string;
-  body: string;
-  isClosed: boolean;
-}
+const AUTO_DISMISS_MS = 90000;
 
 interface NotificationContextType {
-  notifications: NotificationItem[];
+  notifications: Notification[];
   fetchNotifications: () => Promise<void>;
   dismissNotification: (id: string) => Promise<void>;
   deleteNotification: (id: string) => Promise<void>;
@@ -25,12 +23,12 @@ interface NotificationContextType {
 const NotificationContext = createContext<NotificationContextType | null>(null);
 
 export function NotificationProvider({ children }: { children: ReactNode }) {
-  const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const infoTimers = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
 
   const fetchNotifications = async () => {
     try {
-      const response = await api.get<NotificationItem[]>("/notifications");
-      setNotifications(response.data);
+      setNotifications(await notificationService.findAll());
     } catch (err) {
       console.error("Failed to fetch notifications:", err);
     }
@@ -42,7 +40,7 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
     );
 
     try {
-      await api.put(`/notifications/${id}`, { isClosed: true });
+      await notificationService.update(id, { isClosed: true });
     } catch (err) {
       console.error("Failed to close notification:", err);
       fetchNotifications();
@@ -51,8 +49,9 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
 
   const deleteNotification = async (id: string) => {
     setNotifications((prev) => prev.filter((n) => n._id !== id));
+
     try {
-      await api.delete(`/notifications/${id}`);
+      await notificationService.remove(id);
     } catch (err) {
       console.error("Failed to delete notification:", err);
       fetchNotifications();
@@ -64,18 +63,34 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    const infoBanners = notifications.filter(
-      (n) => !n.isClosed && n.category === "INFO"
+    const activeInfoIds = new Set(
+      notifications
+        .filter((n) => !n.isClosed && n.category === "INFO")
+        .map((n) => n._id)
     );
 
-    const timers = infoBanners.map((banner) =>
-      setTimeout(() => {
-        dismissNotification(banner._id);
-      }, 90000)
-    );
+    activeInfoIds.forEach((id) => {
+      if (infoTimers.current[id]) return;
+      infoTimers.current[id] = setTimeout(() => {
+        delete infoTimers.current[id];
+        dismissNotification(id);
+      }, AUTO_DISMISS_MS);
+    });
 
-    return () => timers.forEach((timer) => clearTimeout(timer));
+    Object.keys(infoTimers.current).forEach((id) => {
+      if (!activeInfoIds.has(id)) {
+        clearTimeout(infoTimers.current[id]);
+        delete infoTimers.current[id];
+      }
+    });
   }, [notifications]);
+
+  useEffect(() => {
+    return () => {
+      Object.values(infoTimers.current).forEach(clearTimeout);
+      infoTimers.current = {};
+    };
+  }, []);
 
   return (
     <NotificationContext.Provider
