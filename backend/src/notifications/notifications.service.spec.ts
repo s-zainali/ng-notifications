@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
-import { NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { Types } from 'mongoose';
 import { NotificationsService } from './notifications.service';
 import { Notification } from './notification.schema';
@@ -105,7 +105,7 @@ describe('NotificationsService', () => {
 
       await expect(
         service.findOne(id, new Types.ObjectId().toHexString()),
-      ).rejects.toThrow(UnauthorizedException);
+      ).rejects.toThrow(NotFoundException);
     });
 
     it('returns the notification when it belongs to the user', async () => {
